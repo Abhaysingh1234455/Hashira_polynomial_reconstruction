@@ -2,7 +2,7 @@ import java.math.BigInteger;
 import java.util.*;
 import java.io.*;
 
-public class PolynomialReconstruction {
+public class Main {
 
     private static BigInteger convertToDecimal(String value, int base) {
         return new BigInteger(value, base);
