@@ -1,8 +1,8 @@
-import java.io.*;
 import java.math.BigInteger;
 import java.util.*;
+import java.io.*;
 
-public class Main {
+public class PolynomialReconstruction {
 
     private static BigInteger convertToDecimal(String value, int base) {
         return new BigInteger(value, base);
@@ -89,16 +89,27 @@ public class Main {
 
         BigInteger[] coeffs = lagrangeInterpolation(x, y, k);
 
+        // Print coefficient array
+        System.out.print("[");
+        for (int i = 0; i < coeffs.length; i++) {
+            System.out.print(coeffs[i]);
+            if (i < coeffs.length - 1) System.out.print(", ");
+        }
+        System.out.println("]");
+
+        // Print polynomial
         System.out.print("P(x) = ");
+        boolean first = true;
         for (int i = coeffs.length - 1; i >= 0; i--) {
             if (!coeffs[i].equals(BigInteger.ZERO)) {
-                if (i < coeffs.length - 1 && coeffs[i].compareTo(BigInteger.ZERO) >= 0) {
+                if (!first && coeffs[i].compareTo(BigInteger.ZERO) > 0) {
                     System.out.print(" + ");
                 } else if (coeffs[i].compareTo(BigInteger.ZERO) < 0) {
                     System.out.print(" - ");
                 }
                 System.out.print(coeffs[i].abs());
                 if (i > 0) System.out.print("*x^" + i);
+                first = false;
             }
         }
         System.out.println();
